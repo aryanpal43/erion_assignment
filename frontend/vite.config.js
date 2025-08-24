@@ -12,10 +12,16 @@ export default defineConfig({
         changeOrigin: true,
         secure: true,
       }
-    }
+    },
+    historyApiFallback: true
   },
   build: {
     outDir: 'dist',
     sourcemap: true
+  },
+  // Handle SPA routing
+  preview: {
+    port: 5173,
+    historyApiFallback: true
   }
 })

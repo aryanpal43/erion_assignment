@@ -42,7 +42,12 @@ const Analytics = () => {
       
       // Get all leads for analytics using the dedicated analytics endpoint
       const response = await fetch('https://erion-assignment.onrender.com/api/leads/analytics', {
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'https://erion-assignment.vercel.app',
+          'Access-Control-Allow-Credentials': 'true'
+        }
       });
       
       if (!response.ok) {
