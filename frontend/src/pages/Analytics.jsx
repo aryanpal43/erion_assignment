@@ -41,7 +41,7 @@ const Analytics = () => {
       console.log('🔄 Fetching leads for analytics...');
       
       // Get all leads for analytics using the dedicated analytics endpoint
-      const response = await fetch('/api/leads/analytics', {
+      const response = await fetch('https://erion-assignment.onrender.com/api/leads/analytics', {
         credentials: 'include'
       });
       
