@@ -2,11 +2,11 @@ import axios from 'axios';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://erion-assignment.onrender.com/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:5173',
+    'Access-Control-Allow-Origin': 'https://erion-assignment.vercel.app',
     'Access-Control-Allow-Credentials': 'true'
   },
 });
