@@ -67,6 +67,7 @@ router.post('/register', [
 
     res.status(201).json({
       message: 'User registered successfully',
+      token,
       user: {
         id: user._id,
         first_name: user.first_name,
@@ -142,6 +143,7 @@ router.post('/login', [
 
     res.status(200).json({
       message: 'Login successful',
+      token,
       user: {
         id: user._id,
         first_name: user.first_name,

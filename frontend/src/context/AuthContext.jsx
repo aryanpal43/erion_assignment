@@ -24,8 +24,17 @@ export const AuthProvider = ({ children }) => {
     }
   }, [hasCheckedAuth]);
 
+  // Load token from storage on mount so requests immediately carry it
+  useEffect(() => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (token) {
+      // A subsequent checkAuth will validate it with /auth/me
+    }
+  }, []);
+
   const checkAuth = async () => {
     try {
+      // If a token exists, auth/me will succeed; otherwise it will 401
       const response = await authAPI.getCurrentUser();
       setUser(response.data.user);
       setError(null);
@@ -44,6 +53,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       const response = await authAPI.login(credentials);
+      if (response.data?.token) {
+        localStorage.setItem('token', response.data.token);
+      }
       setUser(response.data.user);
       return response.data;
     } catch (error) {
@@ -60,6 +72,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       const response = await authAPI.register(userData);
+      if (response.data?.token) {
+        localStorage.setItem('token', response.data.token);
+      }
       setUser(response.data.user);
       return response.data;
     } catch (error) {
@@ -74,11 +89,13 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await authAPI.logout();
+      localStorage.removeItem('token');
       setUser(null);
       setError(null);
     } catch (error) {
       console.error('Logout error:', error);
       // Even if logout fails, clear local state
+      localStorage.removeItem('token');
       setUser(null);
       setError(null);
     }

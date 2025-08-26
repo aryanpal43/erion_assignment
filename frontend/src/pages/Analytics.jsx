@@ -41,11 +41,11 @@ const Analytics = () => {
       console.log('🔄 Fetching leads for analytics...');
       
       // Get all leads for analytics using the dedicated analytics endpoint
-      const response = await fetch('https://erion-assignment.onrender.com/api/leads/analytics', {
+      const response = await fetch('http://localhost:5000/api/leads/analytics', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'https://erion-assignment.vercel.app',
+          'Access-Control-Allow-Origin': 'http://localhost:5173',
           'Access-Control-Allow-Credentials': 'true'
         }
       });
